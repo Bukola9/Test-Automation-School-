@@ -5,7 +5,7 @@ console.log(multiplyAge)*/
 
 const myFavLanguage ='Javascript'
 const myAge = 30
-const name = 'Bukola'
+const name = 'Bukola Adeniran'
 const sentence = 'My name is ' + name + '.' + ' I am ' + myAge + ' years old'
 
 console.log(sentence)
