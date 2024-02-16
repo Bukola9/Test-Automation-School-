@@ -8,18 +8,8 @@ function multiplying(table){
     
 }
 
-multiplying(1)
 multiplying(2)
-multiplying(3)
-multiplying(4)
-multiplying(5)
-multiplying(6)
-multiplying(7)
-multiplying(8)
-multiplying(9)
-multiplying(10)
-multiplying(11)
-multiplying(12)
+
 
 
 
