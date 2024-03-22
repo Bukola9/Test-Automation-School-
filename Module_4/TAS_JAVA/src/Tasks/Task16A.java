@@ -1,28 +1,28 @@
 package Tasks;
 
 public class Task16A {
-    public void readBooks(){
+    public void documentBugs(){
 
     }
     //Way 1: Number of parameters
-    public void readBooks(int number){
+    public void documentBugs(int number){
 
     }
-    public void readBooks(int number, int numbers){
+    public void documentBugs(int number, int numbers){
 
     }
     //Way 2: Data type of parameters
-    public void readBooks(int number, float data){
+    public void documentBugs(int number, float data){
 
     }
-    public void readBooks(String name, byte value){
+    public void documentBugs(String name, byte value){
 
     }
     //Way 3: Sequence of data type of parameters
-    public void readBooks(boolean condition, float data){
+    public void documentBugs(boolean condition, float data){
 
     }
-    public void readBooks(float data, boolean condition){
+    public void documentBugs(float data, boolean condition){
 
     }
 
