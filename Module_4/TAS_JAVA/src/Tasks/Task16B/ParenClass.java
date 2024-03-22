@@ -4,11 +4,11 @@ public class ParenClass {
     //OVERRIDING: Create two methods in a parent class with arguments.
     //Write a print statement in the method body.
 
-    public void readBooks(String author, String title){
-        System.out.println("I would rather read a book than watch a movie!");
+    public void eatFood(String type, String when){
+        System.out.println("I will like to eat Amala");
     }
 
-    public void watchFootball(String club, boolean condition){
-        System.out.println("I am a chelsea fan");
+    public void studyCourse(String course, boolean condition){
+        System.out.println("I studied geology");
     }
 }
