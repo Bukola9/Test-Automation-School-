@@ -4,7 +4,7 @@ class Animal:
     leg_count = 4
 
     #default Constructor
-    def __int__(self):
+    def __init__(self):
         self.name = "Unknown"
 
 
@@ -14,7 +14,7 @@ class Vehicle:
     tire_count = 4
 
     #parameterized constructor
-    def __int__(self, make):
+    def __init__(self, make):
         self.make = make
 
     def set_tire_count(self, count):
