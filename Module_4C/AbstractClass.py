@@ -16,6 +16,6 @@ class DivElement(IWebElement):
 
 class Element(IWebElement):
         def get_name(self):
-            return "div"
+            return "div "
 
 
