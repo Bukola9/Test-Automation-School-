@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "5c197ee2-a2d6-4159-8fa6-8d8d9c2daa6b",
+		"name": "Github Action Practice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20853348",
+		"_collection_link": "https://interstellar-meteor-62003.postman.co/workspace/Ercas~05aa1b34-75ad-49bf-8b3a-4f7f5288ac98/collection/20853348-5c197ee2-a2d6-4159-8fa6-8d8d9c2daa6b?action=share&source=collection_link&creator=20853348"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Registration",
+					"item": [
+						{
+							"name": "Register Merchant - Valid",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Step 1: Define an array of names",
+											"const names = [",
+											"    \"Alice\", \"Bob\", \"Charlie\", \"David\", \"Eve\", \"Frank\", \"Grace\", \"Hannah\", \"Ivy\", \"Jack\",",
+											"    \"Karen\", \"Liam\", \"Mia\", \"Noah\", \"Olivia\", \"Paul\", \"Quinn\", \"Rita\", \"Sam\", \"Tina\",",
+											"    \"Uma\", \"Victor\", \"Wendy\", \"Xander\", \"Yara\", \"Zane\"",
+											"];",
+											"",
+											"// Step 2: Generate a random index",
+											"const randomIndex = Math.floor(Math.random() * names.length);",
+											"",
+											"// Step 3: Select the random name",
+											"const randomName = names[randomIndex];",
+											"",
+											"// Step 4: Set the random name as an environment variable",
+											"pm.environment.set(\"randomName\", randomName);",
+											"function generateRandomString(length) {",
+											"    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';",
+											"    let result = '';",
+											"    for (let i = 0; i < length; i++) {",
+											"        const randomIndex = Math.floor(Math.random() * characters.length);",
+											"        result += characters[randomIndex];",
+											"    }",
+											"    return result;",
+											"}",
+											"",
+											"const randomLocalPart = generateRandomString(10); // Adjust the length as needed",
+											"const randomEmail = `${randomLocalPart}@mailinator.com`;",
+											"",
+											"pm.environment.set(\"randomEmail\", randomEmail);",
+											"",
+											"function getRandomDigit() {",
+											"    return Math.floor(Math.random() * 10); // Generates a random digit between 0 and 9",
+											"}",
+											"",
+											"const prefix = \"081\"; // The fixed part of the phone number",
+											"",
+											"let randomDigits = \"\";",
+											"for (let i = 0; i < 8; i++) { // Generate 8 random digits",
+											"    randomDigits += getRandomDigit();",
+											"}",
+											"",
+											"const randomPhoneNumber = prefix + randomDigits;",
+											"",
+											"pm.environment.set(\"randomPhoneNumber\", randomPhoneNumber);",
+											"",
+											"pm.environment.set(\"password\", \"Olubukola1@\");",
+											"pm.environment.set(\"country\", \"Nigeria\");",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"var response = JSON.parse(responseBody);",
+											"tests[\"verify success message\"] = response.requestSuccessful == \"true\";",
+											"tests[\"verify response message\"] = response.responseMessage == \"Registration Successful kindly check your email inbox/spam to validate your account\";",
+											"tests[\"verify response code\"] = response.responseCode == \"00\";"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n       \"firstname\": \"{{randomName}}\",\n       \"lastname\":\"{{randomName}}\",\n       \"email\": \"{{randomEmail}}\",\n       \"country\": \"{{country}}\",\n       \"phone_number\": \"{{randomPhoneNumber}}\",\n       \"password\": \"{{password}}\"\n}  \n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Login - Valid",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"var response = JSON.parse(responseBody);",
+											"tests[\"verify success message\"] = response.requestSuccessful == true;",
+											"tests[\"verify response message\"] = response.responseMessage == \"successfully logged in\"",
+											"tests[\"verify response code\"] = response.responseCode == \"00\";"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"email\" : \"ercas@mailinator.com\",\n   \"password\": \"Olubukola1@\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.ercaspay.com/api/v1/auth/login",
+									"protocol": "https",
+									"host": [
+										"api",
+										"ercaspay",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login - Invalid Email Address",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"var response = JSON.parse(responseBody);",
+											"tests[\"verify success message\"] = response.requestSuccessful == false;",
+											"tests[\"verify response message\"] = response.errorMessage == \"Wrong Credentials was entered!\"",
+											"tests[\"verify response code\"] = response.responseCode == \"failed\";"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"email\" : \"{{email}}\",\n   \"password\": \"Olubukola1@\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login - Blank Password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 422\", function () {",
+											"    pm.response.to.have.status(422);",
+											"});",
+											"var response = JSON.parse(responseBody);",
+											"tests[\"verify success message\"] = response.requestSuccessful == false;",
+											"tests[\"verify response message\"] = response.errorMessage == \"Validation errors\"",
+											"tests[\"verify response code\"] = response.responseBody.errors.password == \"The password field is required.\";"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"email\" : \"testacc@mailinator.com\",\n   \"password\": \"  \"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
